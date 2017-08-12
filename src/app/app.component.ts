@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions } from '@ionic-native/media-capture';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -17,6 +17,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      document.addEventListener('pendingcaptureresult', function(mediaFiles) {
+         console.log(mediaFiles)
+       });
+
+      // pendingcaptureerror is fired if the capture call is unsuccessful
+      document.addEventListener('pendingcaptureerror', function(error) {
+        console.log(error)
+      });
     });
   }
 }
